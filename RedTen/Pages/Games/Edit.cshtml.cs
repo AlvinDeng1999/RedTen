@@ -14,7 +14,8 @@ namespace RedTen.Pages.Games
     public class EditModel : PageModel
     {
         private readonly RedTen.Data.ApplicationDbContext _context;
-
+        public List<Player> Available { get; set; }
+      
         public EditModel(RedTen.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -25,12 +26,15 @@ namespace RedTen.Pages.Games
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            
+            
             if (id == null)
             {
                 return NotFound();
             }
 
-            Game = await _context.Game.FirstOrDefaultAsync(m => m.id == id);
+            Game = await _context.Game.Include(m => m.Players).FirstOrDefaultAsync(m => m.id == id);
+            Available = await _context.Player.ToListAsync();
 
             if (Game == null)
             {

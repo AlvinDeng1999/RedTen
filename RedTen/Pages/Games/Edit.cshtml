@@ -10,7 +10,7 @@
 <h4>Game</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-10">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Game.id" />
@@ -20,9 +20,32 @@
                 <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Game.Players" class="control-label"></label>
-                <input asp-for="Game.Players" class="form-control" />
-                <span asp-validation-for="Game.Players" class="text-danger"></span>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Available Players
+                            </th>
+                            <th>
+                                Currently Playing
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select asp-for="Available" asp-items="@(new SelectList(Model.Available, "id", "Name"))" size="8" class="col-md-10">
+                                    
+                                </select>
+                            </td>
+                            <td>
+                                <select asp-for="Game.Players" asp-items="@(new SelectList(Model.Game.Players, "id", "Name"))" size="8" class="col-md-10">
+
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
