@@ -4,7 +4,19 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#ShiftRight, #ShiftLeft").click(function (event) {
+            var ID = $(event.target).attr("ID");
+            var ChooseFrom = ID == "ShiftRight" ? "ChooseLeft" : "#ChooseRight";
+            var ChooseFrom = ID == "ShiftLeft" ? "ChooseLeft" : "#ChooseRight";
+            var SelectData = $(ChooseFrom + " :selected").toArray();
+            $(moveTo).append(selectData);
+            SelectData.remove;
+        });
+    });
+</script>
 <h1>Edit</h1>
 
 <h4>Game</h4>
@@ -27,22 +39,42 @@
                                 Available Players
                             </th>
                             <th>
+
+                            </th>
+                            <th>
                                 Currently Playing
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                <select asp-for="Available" asp-items="@(new SelectList(Model.Available, "id", "Name"))" size="8" class="col-md-10">
+                            <td rowspan="5">
+                                <select id="ChooseLeft" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "id", "Name"))" size="8" class="col-md-10">
                                     
                                 </select>
                             </td>
                             <td>
-                                <select asp-for="Game.Players" asp-items="@(new SelectList(Model.Game.Players, "id", "Name"))" size="8" class="col-md-10">
+                                
+                                
+                            </td>
+                            <td rowspan="5">
+                                <select id="ChooseRight" multiple="multiple" asp-for="Game.Players" asp-items="@(new SelectList(Model.Game.Players, "id", "Name"))" size="8" class="col-md-10">
 
                                 </select>
                             </td>
+                        </tr>
+                        <tr>
+                            <td><input id="ShiftRight" type="button" value=" >> " /></td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                        <tr>
+                           
+                            <td><input id="ShiftRight" type="button" value=" << " /></td>
+                        </tr>
+                        <tr>
+
                         </tr>
                     </tbody>
                 </table>
