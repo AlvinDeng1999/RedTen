@@ -4,18 +4,22 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
+
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $("#ShiftRight, #ShiftLeft").click(function (event) {
-            var ID = $(event.target).attr("ID");
-            var ChooseFrom = ID == "ShiftRight" ? "ChooseLeft" : "#ChooseRight";
-            var ChooseFrom = ID == "ShiftLeft" ? "ChooseLeft" : "#ChooseRight";
-            var SelectData = $(ChooseFrom + " :selected").toArray();
-            $(moveTo).append(selectData);
-            SelectData.remove;
+    $(document).ready(
+    
+        function () {
+            $("#ShiftRight, #ShiftLeft").click(function (event) {
+                var ID = $(event.target).attr("ID");
+                var ChooseFrom = (ID === "ShiftRight") ? "#ChooseLeft" : "#ChooseRight";
+                var moveTo = (ID === "ShiftLeft") ? "#ChooseLeft" : "#ChooseRight";
+                var selectData = $(ChooseFrom + " :selected").toArray();
+                $(moveTo).append(selectData);
+                selectData.remove;
+            });
         });
-    });
+   
 </script>
 <h1>Edit</h1>
 
@@ -71,7 +75,7 @@
                         </tr>
                         <tr>
                            
-                            <td><input id="ShiftRight" type="button" value=" << " /></td>
+                            <td><input id="ShiftLeft" type="button" value=" << " /></td>
                         </tr>
                         <tr>
 
