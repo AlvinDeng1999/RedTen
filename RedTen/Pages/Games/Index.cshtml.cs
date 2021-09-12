@@ -23,7 +23,7 @@ namespace RedTen.Pages.Games
 
         public async Task OnGetAsync()
         {
-            Game = await _context.Game.ToListAsync();
+            Game = await _context.Game.OrderByDescending(g => g.Session_Time).ToListAsync();
         }
     }
 }

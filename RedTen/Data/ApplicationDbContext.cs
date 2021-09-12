@@ -15,5 +15,7 @@ namespace RedTen.Data
         }
         public DbSet<RedTen.Models.Player> Player { get; set; }
         public DbSet<RedTen.Models.Game> Game { get; set; }
+
+        public DbSet<RedTen.Models.PlayerGame> PlayerGame {get;set;}
     }
 }

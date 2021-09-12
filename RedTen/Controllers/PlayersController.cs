@@ -34,7 +34,7 @@ namespace RedTen.Controllers
             }
 
             var player = await _context.Player
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace RedTen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,name,email")] Player player)
         {
-            if (id != player.id)
+            if (id != player.PlayerId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace RedTen.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlayerExists(player.id))
+                    if (!PlayerExists(player.PlayerId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace RedTen.Controllers
             }
 
             var player = await _context.Player
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace RedTen.Controllers
 
         private bool PlayerExists(int id)
         {
-            return _context.Player.Any(e => e.id == id);
+            return _context.Player.Any(e => e.PlayerId == id);
         }
     }
 }

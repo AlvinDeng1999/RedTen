@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace RedTen.Models
 {
-    public class Game
+    public class PlayerGame
     {
+        [Key]
+        public int Id { get; set; }
+        [ForeignKey("Player")]
+        public int PlayerId { get; set; }
+        
+        [ForeignKey("Game")]
         public int GameId { get; set; }
-        [Display(Name="Session Time")]
-        public DateTime Session_Time { get; set; }
-
-        //public List<Player> Players { get; set; }
-        //public List<Player> Winners { get; set; }
-        //public List<Player> Losers { get; set; }
-
+       
     }
 }

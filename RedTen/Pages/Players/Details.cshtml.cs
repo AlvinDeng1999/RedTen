@@ -28,7 +28,7 @@ namespace RedTen.Pages.Players
                 return NotFound();
             }
 
-            Player = await _context.Player.FirstOrDefaultAsync(m => m.id == id);
+            Player = await _context.Player.FirstOrDefaultAsync(m => m.PlayerId == id);
 
             if (Player == null)
             {

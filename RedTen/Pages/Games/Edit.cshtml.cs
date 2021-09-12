@@ -15,7 +15,7 @@ namespace RedTen.Pages.Games
     {
         private readonly RedTen.Data.ApplicationDbContext _context;
         public List<Player> Available { get; set; }
-      
+        public List<Player> PlayersInGame { get; set; }
         public EditModel(RedTen.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -33,9 +33,13 @@ namespace RedTen.Pages.Games
                 return NotFound();
             }
 
-            Game = await _context.Game.Include(m => m.Players).FirstOrDefaultAsync(m => m.id == id);
-            Available = await _context.Player.Where(p=>!Game.Players.Select(gp=>gp.id).Contains(p.id)).ToListAsync();
+            Game = await _context.Game.FirstOrDefaultAsync(m => m.GameId == id);
+            
 
+            var playerGames = await _context.PlayerGame.Where(gp=>gp.GameId==id).ToListAsync();
+            PlayersInGame = await _context.Player.Where(p => playerGames.Select(pg => pg.PlayerId).Contains(p.PlayerId)).ToListAsync();
+
+            Available = await _context.Player.Where(p => !playerGames.Select(pg => pg.PlayerId).Contains(p.PlayerId)).ToListAsync();
             if (Game == null)
             {
                 return NotFound();
@@ -51,10 +55,18 @@ namespace RedTen.Pages.Games
             {
                 return Page();
             }
-            var players = this.Request.Form["Game.Players"].Select(p => int.Parse(p));
-            var playersInGame = _context.Player.Where(p => players.Contains(p.id));
-            Game.Players.AddRange(playersInGame);
-            _context.Attach(Game).State = EntityState.Modified;
+            var players = this.Request.Form["PlayersInGame"].Select(p => int.Parse(p));
+            var playersInGame = _context.Player.Where(p => players.Contains(p.PlayerId));
+
+            ICollection<PlayerGame> gamePlayers = playersInGame.Select(p => new PlayerGame()
+            {
+                GameId = Game.GameId,
+                PlayerId = p.PlayerId
+            }).ToArray();
+            foreach (var gp in gamePlayers)
+                _context.PlayerGame.Add(gp).State = EntityState.Added;
+           
+            //_context.Attach(Game).State = EntityState.Modified;
            
             try
             {
@@ -62,7 +74,7 @@ namespace RedTen.Pages.Games
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GameExists(Game.id))
+                if (!GameExists(Game.GameId))
                 {
                     return NotFound();
                 }
@@ -77,7 +89,7 @@ namespace RedTen.Pages.Games
 
         private bool GameExists(int id)
         {
-            return _context.Game.Any(e => e.id == id);
+            return _context.Game.Any(e => e.GameId == id);
         }
     }
 }

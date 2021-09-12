@@ -8,7 +8,7 @@ namespace RedTen.Models
 {
     public class Player
     {
-        public int id { get; set; }
+        public int PlayerId { get; set; }
 
         [Display(Name="Player Name")]
         public string Name { get; set; }

@@ -30,7 +30,7 @@ namespace RedTen.Pages.Players
                 return NotFound();
             }
 
-            Player = await _context.Player.FirstOrDefaultAsync(m => m.id == id);
+            Player = await _context.Player.FirstOrDefaultAsync(m => m.PlayerId == id);
 
             if (Player == null)
             {
@@ -56,7 +56,7 @@ namespace RedTen.Pages.Players
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlayerExists(Player.id))
+                if (!PlayerExists(Player.PlayerId))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace RedTen.Pages.Players
 
         private bool PlayerExists(int id)
         {
-            return _context.Player.Any(e => e.id == id);
+            return _context.Player.Any(e => e.PlayerId == id);
         }
     }
 }

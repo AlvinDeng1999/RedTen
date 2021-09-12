@@ -28,7 +28,7 @@ namespace RedTen.Pages.Games
                 return NotFound();
             }
 
-            Game = await _context.Game.FirstOrDefaultAsync(m => m.id == id);
+            Game = await _context.Game.FirstOrDefaultAsync(m => m.GameId == id);
 
             if (Game == null)
             {

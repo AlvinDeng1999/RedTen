@@ -29,7 +29,7 @@
     <div class="col-md-10">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Game.id" />
+            <input type="hidden" asp-for="Game.GameId" />
             <div class="form-group">
                 <label asp-for="Game.Session_Time" class="control-label"></label>
                 <input asp-for="Game.Session_Time" class="form-control" />
@@ -53,7 +53,7 @@
                     <tbody>
                         <tr>
                             <td rowspan="5">
-                                <select id="LeftList" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "id", "Name"))" size="8" class="col-md-10">
+                                <select id="LeftList" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "PlayerId", "Name"))" size="8" class="col-md-10">
                                     
                                 </select>
                             </td>
@@ -62,7 +62,7 @@
                                 
                             </td>
                             <td rowspan="5">
-                                <select id="RightList" multiple="multiple" asp-for="Game.Players" asp-items="@(new SelectList(Model.Game.Players, "id", "Name"))" size="8" class="col-md-10">
+                                <select id="RightList" multiple="multiple" asp-for="PlayersInGame" asp-items="@(new SelectList(Model.PlayersInGame, "PlayerId", "Name"))" size="8" class="col-md-10">
 
                                 </select>
                             </td>
