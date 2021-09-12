@@ -54,7 +54,7 @@ namespace RedTen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,playedAt")] Game game)
+        public async Task<IActionResult> Create([Bind("id,Session_Time")] Game game)
         {
             if (ModelState.IsValid)
             {

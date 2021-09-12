@@ -12,8 +12,8 @@
         function () {
             $("#ShiftRight, #ShiftLeft").click(function (event) {
                 var ID = $(event.target).attr("ID");
-                var ChooseFrom = (ID === "ShiftRight") ? "#ChooseLeft" : "#ChooseRight";
-                var moveTo = (ID === "ShiftLeft") ? "#ChooseLeft" : "#ChooseRight";
+                var ChooseFrom = (ID === "ShiftRight") ? "#LeftList" : "#RightList";
+                var moveTo = (ID === "ShiftLeft") ? "#LeftList" : "#RightList";
                 var selectData = $(ChooseFrom + " :selected").toArray();
                 $(moveTo).append(selectData);
                 selectData.remove;
@@ -46,14 +46,14 @@
 
                             </th>
                             <th>
-                                Currently Playing
+                                Players In-Game
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td rowspan="5">
-                                <select id="ChooseLeft" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "id", "Name"))" size="8" class="col-md-10">
+                                <select id="LeftList" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "id", "Name"))" size="8" class="col-md-10">
                                     
                                 </select>
                             </td>
@@ -62,7 +62,7 @@
                                 
                             </td>
                             <td rowspan="5">
-                                <select id="ChooseRight" multiple="multiple" asp-for="Game.Players" asp-items="@(new SelectList(Model.Game.Players, "id", "Name"))" size="8" class="col-md-10">
+                                <select id="RightList" multiple="multiple" asp-for="Game.Players" asp-items="@(new SelectList(Model.Game.Players, "id", "Name"))" size="8" class="col-md-10">
 
                                 </select>
                             </td>

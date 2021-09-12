@@ -34,7 +34,7 @@ namespace RedTen.Pages.Games
             }
 
             Game = await _context.Game.Include(m => m.Players).FirstOrDefaultAsync(m => m.id == id);
-            Available = await _context.Player.ToListAsync();
+            Available = await _context.Player.Where(p=>!Game.Players.Select(gp=>gp.id).Contains(p.id)).ToListAsync();
 
             if (Game == null)
             {
@@ -51,9 +51,11 @@ namespace RedTen.Pages.Games
             {
                 return Page();
             }
-
+            var players = this.Request.Form["Game.Players"].Select(p => int.Parse(p));
+            var playersInGame = _context.Player.Where(p => players.Contains(p.id));
+            Game.Players.AddRange(playersInGame);
             _context.Attach(Game).State = EntityState.Modified;
-
+           
             try
             {
                 await _context.SaveChangesAsync();
