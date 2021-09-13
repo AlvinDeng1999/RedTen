@@ -1,4 +1,4 @@
 {
-  "baseUrl": "https://atata.io/"
+  "baseUrl": "https://localhost:44326/"
   // Other environment specific configuration properties can be added here.
 }
