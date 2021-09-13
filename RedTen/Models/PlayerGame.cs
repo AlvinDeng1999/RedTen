@@ -16,6 +16,6 @@ namespace RedTen.Models
         
         [ForeignKey("Game")]
         public int GameId { get; set; }
-       
+        public bool Loser { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace RedTen.Pages.Games
     public class EditModel : PageModel
     {
         private readonly RedTen.Data.ApplicationDbContext _context;
-        public List<Player> Available { get; set; }
-        public List<Player> PlayersInGame { get; set; }
+        public List<Player> Players { get; set; }
+        public List<Player> Losers { get; set; }
         public EditModel(RedTen.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -35,11 +35,13 @@ namespace RedTen.Pages.Games
 
             Game = await _context.Game.FirstOrDefaultAsync(m => m.GameId == id);
             
-
+            
             var playerGames = await _context.PlayerGame.Where(gp=>gp.GameId==id).ToListAsync();
-            PlayersInGame = await _context.Player.Where(p => playerGames.Select(pg => pg.PlayerId).Contains(p.PlayerId)).ToListAsync();
+            Players = await _context.Player.Where(p => playerGames.Select(pg => pg.PlayerId).Contains(p.PlayerId)).ToListAsync();
 
-            Available = await _context.Player.Where(p => !playerGames.Select(pg => pg.PlayerId).Contains(p.PlayerId)).ToListAsync();
+            var LoserIDs = playerGames.Where(pg => pg.Loser).Select(pg => pg.PlayerId);
+            Losers = Players.Where(pg => LoserIDs.Contains(pg.PlayerId)).ToList();
+            Players = Players.Except(Losers).ToList();
             if (Game == null)
             {
                 return NotFound();
@@ -55,18 +57,15 @@ namespace RedTen.Pages.Games
             {
                 return Page();
             }
-            var players = this.Request.Form["PlayersInGame"].Select(p => int.Parse(p));
-            var playersInGame = _context.Player.Where(p => players.Contains(p.PlayerId));
 
-            ICollection<PlayerGame> gamePlayers = playersInGame.Select(p => new PlayerGame()
+            var playerGames = await _context.PlayerGame.Where(gp => gp.GameId == Game.GameId).ToListAsync();
+            var losers = this.Request.Form["Losers"].Select(p => int.Parse(p));
+            foreach(var pg in playerGames)
             {
-                GameId = Game.GameId,
-                PlayerId = p.PlayerId
-            }).ToArray();
-            foreach (var gp in gamePlayers)
-                _context.PlayerGame.Add(gp).State = EntityState.Added;
-           
-            //_context.Attach(Game).State = EntityState.Modified;
+                pg.Loser = losers.Contains(pg.PlayerId);
+            }
+
+            foreach (var gp in playerGames) _context.PlayerGame.Add(gp).State = EntityState.Modified;
            
             try
             {

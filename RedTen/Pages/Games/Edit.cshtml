@@ -2,7 +2,7 @@
 @model RedTen.Pages.Games.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Game Result";
 }
 
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
@@ -40,20 +40,20 @@
                     <thead>
                         <tr>
                             <th>
-                                Available Players
+                                Winners
                             </th>
                             <th>
 
                             </th>
                             <th>
-                                Players In-Game
+                                Losers
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td rowspan="5">
-                                <select id="LeftList" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "PlayerId", "Name"))" size="8" class="col-md-10">
+                                <select id="LeftList" multiple="multiple" asp-for="Players" asp-items="@(new SelectList(Model.Players, "PlayerId", "Name"))" size="8" class="col-md-10">
                                     
                                 </select>
                             </td>
@@ -62,7 +62,7 @@
                                 
                             </td>
                             <td rowspan="5">
-                                <select id="RightList" multiple="multiple" asp-for="PlayersInGame" asp-items="@(new SelectList(Model.PlayersInGame, "PlayerId", "Name"))" size="8" class="col-md-10">
+                                <select id="RightList" multiple="multiple" asp-for="Losers" asp-items="@(new SelectList(Model.Losers, "PlayerId", "Name"))" size="8" class="col-md-10">
 
                                 </select>
                             </td>

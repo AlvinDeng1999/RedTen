@@ -44,21 +44,6 @@ namespace RedTen.Pages.Games
                 return Page();
             }
 
-
-            /*
-             * var players = this.Request.Form["PlayersInGame"].Select(p => int.Parse(p));
-            var playersInGame = _context.Player.Where(p => players.Contains(p.PlayerId));
-
-            ICollection<PlayerGame> gamePlayers = playersInGame.Select(p => new PlayerGame()
-            {
-                GameId = Game.GameId,
-                PlayerId = p.PlayerId
-            }).ToArray();
-            foreach (var gp in gamePlayers)
-                _context.PlayerGame.Add(gp).State = EntityState.Added;
-             * */
-
-
             _context.Game.Add(Game);
 
             await _context.SaveChangesAsync();
@@ -67,7 +52,8 @@ namespace RedTen.Pages.Games
             IEnumerable<PlayerGame> gamePlayers = playersInGame.Select(p => new PlayerGame()
             {
                 GameId = Game.GameId,
-                PlayerId = p
+                PlayerId = p,
+                Loser = false
             });
             foreach (var gp in gamePlayers) _context.PlayerGame.Add(gp).State = EntityState.Added;
 
