@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,9 @@ namespace RedTen.Pages.Games
     {
         private readonly RedTen.Data.ApplicationDbContext _context;
         public List<Player> Available { get; set; }
+        [Display(Name ="Players In-Game")]
+        [Required]
+        [MinLength(3, ErrorMessage = " ")]
         public List<Player> PlayersInGame { get; set; }
 
 

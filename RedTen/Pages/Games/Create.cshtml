@@ -17,7 +17,13 @@
                 $(moveTo).append(selectData);
                 selectData.remove;
             });
+            $(".btn-primary").click(function () {
+                $("#RightList").find("option").each(function () {
+                    $(this).prop("selected", true);
+                })
+            });
         });
+
 
 </script>
 <h1>Create</h1>
@@ -25,12 +31,13 @@
 <h4>Game</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-10">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Game.Session_Time" class="control-label"></label>
                 <input asp-for="Game.Session_Time" class="form-control" />
+                <br />
                 <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -59,6 +66,8 @@
                             <td rowspan="5">
                                 <select id="RightList" multiple="multiple" asp-for="PlayersInGame" asp-items="@(new SelectList(Model.PlayersInGame, "PlayerId", "Name"))" size="8" class="col-md-10">
                                 </select>
+                                <br />
+                                <span asp-validation-for="PlayersInGame" class="text-danger"></span>
                             </td>
                         </tr>
                         <tr>
@@ -74,11 +83,14 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="form-group">
+                    <label asp-for="Game.Location" class="control-label"></label>
+                    <input asp-for="Game.Location" class="form-control" />
+                    <span asp-validation-for="Game.Location" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

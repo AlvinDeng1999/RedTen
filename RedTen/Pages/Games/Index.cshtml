@@ -16,6 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Game[0].Session_Time)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Location)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -26,6 +29,9 @@
                 @Html.DisplayFor(modelItem => item.Session_Time)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td style="text-align:right">
                 <a asp-page="./Edit" asp-route-id="@item.GameId">Game Result</a> |
                 <a asp-page="./Details" asp-route-id="@item.GameId">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.GameId">Delete</a>

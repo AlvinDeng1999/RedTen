@@ -18,8 +18,20 @@
                 $(moveTo).append(selectData);
                 selectData.remove;
             });
+
+            $("#LeftList").find("option").each(function () {
+                $(this).prop("selected", true);
+            });
+            $("#RightList").find("option").each(function () {
+                $(this).prop("selected", true);
+            })
+
+            $(".btn-primary").click(function () {
+                $("#RightList").find("option").each(function () {
+                    $(this).prop("selected", true);
+                })
+            });
         });
-   
 </script>
 <h1>Edit</h1>
 
@@ -30,52 +42,61 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Game.GameId" />
-            <div class="form-group">
-                <label asp-for="Game.Session_Time" class="control-label"></label>
-                <input asp-for="Game.Session_Time" class="form-control" />
-                <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Game.Session_Time" class="control-label"></label>
+                    <input asp-for="Game.Session_Time" class="form-control" />
+                    <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Game.Location" class="control-label"></label>
+                    <input id="ChangeLocation" asp-for="Game.Location" class="form-control" />
+                    <span asp-validation-for="Game.Location" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
-                <table class="table">
+                <table class="table" style="border: 0">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="border: 0">
                                 Winners
                             </th>
-                            <th>
+                            <th style="border: 0">
 
                             </th>
-                            <th>
+                            <th style="border: 0">
                                 Losers
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td rowspan="5">
-                                <select id="LeftList" multiple="multiple" asp-for="Players" asp-items="@(new SelectList(Model.Players, "PlayerId", "Name"))" size="8" class="col-md-10">
-                                    
-                                </select>
+                            <td rowspan="5" style="border: 0">
+                                    <select id="LeftList" multiple="multiple" asp-for="Players" asp-items="@(new SelectList(Model.Players, "PlayerId", "Name"))" size="8" class="col-md-10">
+                                    </select>
+                                <br />
+                                <span asp-validation-for="Players" class="text-danger"></span>
                             </td>
-                            <td>
+                            <td style="border: 0">
                                 
                                 
                             </td>
-                            <td rowspan="5">
+                            <td rowspan="5" style="border: 0">
                                 <select id="RightList" multiple="multiple" asp-for="Losers" asp-items="@(new SelectList(Model.Losers, "PlayerId", "Name"))" size="8" class="col-md-10">
-
                                 </select>
+                                <br />
+                                <span asp-validation-for="Losers" class="text-danger"></span>
                             </td>
                         </tr>
                         <tr>
-                            <td><input id="ShiftRight" type="button" value=" >> " /></td>
+                            <td style="border: 0"><input id="ShiftRight" type="button" value=" >> " /></td>
                         </tr>
                         <tr>
 
                         </tr>
                         <tr>
                            
-                            <td><input id="ShiftLeft" type="button" value=" << " /></td>
+                            <td style="border: 0"><input id="ShiftLeft" type="button" value=" << " /></td>
                         </tr>
                         <tr>
 

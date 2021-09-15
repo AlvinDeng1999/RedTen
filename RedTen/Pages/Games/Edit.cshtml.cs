@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,12 @@ namespace RedTen.Pages.Games
     public class EditModel : PageModel
     {
         private readonly RedTen.Data.ApplicationDbContext _context;
+        [Required]
+        [MinLength(1, ErrorMessage ="Please have at least 1 winner selected")]
         public List<Player> Players { get; set; }
+
+        [Required]
+        [MinLength(1, ErrorMessage = "Please have at least 1 loser selected")]
         public List<Player> Losers { get; set; }
         public EditModel(RedTen.Data.ApplicationDbContext context)
         {
@@ -60,13 +66,14 @@ namespace RedTen.Pages.Games
 
             var playerGames = await _context.PlayerGame.Where(gp => gp.GameId == Game.GameId).ToListAsync();
             var losers = this.Request.Form["Losers"].Select(p => int.Parse(p));
+
             foreach(var pg in playerGames)
             {
                 pg.Loser = losers.Contains(pg.PlayerId);
             }
 
             foreach (var gp in playerGames) _context.PlayerGame.Add(gp).State = EntityState.Modified;
-           
+            _context.Game.Update(Game);
             try
             {
                 await _context.SaveChangesAsync();

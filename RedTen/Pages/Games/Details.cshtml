@@ -18,6 +18,38 @@
             @Html.DisplayFor(model => model.Game.Session_Time)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Game.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Game.Location)
+        </dd>
+        <dt class="col-sm-2">
+            Winners
+        </dt>
+        <dd class="col-sm-10">
+            <ul style="list-style-type: none; padding-left: 0">
+                @foreach (var item in Model.Players)
+                {
+                    <li>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </li>
+                }
+            </ul>
+        </dd>
+        <dt class="col-sm-2">
+            Losers
+        </dt>
+        <dd class="col-sm-10">
+            <ul style="list-style-type: none; padding-left: 0">
+                @foreach (var item in Model.Losers)
+                {
+                    <li>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </li>
+                }
+            </ul>
+        </dd>
+        <dt class="col-sm-2">
             @*@Html.DisplayNameFor(model => model.Game.Players)*@
         </dt>
         <dd class="col-sm-10">
