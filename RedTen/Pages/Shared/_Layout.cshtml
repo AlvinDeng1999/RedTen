@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - RedTen</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/fontawesome/css/all.css" />
 </head>
 <body>
     <header>
@@ -21,12 +22,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
                         <li class="nav-item">
                             <a id="gamesId" class="nav-link text-dark" asp-area="" asp-page="/Games/Index">Game</a>
                         </li>
                         <li class="nav-item">
                             <a id="playersId" class="nav-link text-dark" asp-area="" asp-page="/Players/Index">Players</a>
                         </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>

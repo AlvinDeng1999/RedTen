@@ -26,44 +26,51 @@
 
 
 </script>
-<h1>Create</h1>
+<h1>Create New Game</h1>
 
-<h4>Game</h4>
 <hr />
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Game.Session_Time" class="control-label"></label>
-                <input asp-for="Game.Session_Time" class="form-control" />
-                <br />
-                <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b><label style="" asp-for="Game.Session_Time" class="control-label"></label></b>
+                    <input asp-for="Game.Session_Time" class="form-control" />
+                    <br />
+                    <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <b><label asp-for="Game.Location" class="control-label"></label></b>
+                    <input asp-for="Game.Location" class="form-control" />
+                    <br />
+                    <span asp-validation-for="Game.Location" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
-                <table class="table">
+                <table class="table" >
                     <thead>
                         <tr>
-                            <th>
+                            <th style="border: 0">
                                 Available Players
                             </th>
-                            <th>
+                            <th style="border: 0">
 
                             </th>
-                            <th>
+                            <th style="border: 0">
                                 Players In-Game
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td rowspan="5">
-                                <select id="LeftList" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "PlayerId", "Name"))" size="8" class="col-md-10">
+                            <td rowspan="5" style="border: 0">
+                                <select style=""id="LeftList" multiple="multiple" asp-for="Available" asp-items="@(new SelectList(Model.Available, "PlayerId", "Name"))" size="8" class="col-md-10">
                                 </select>
                             </td>
-                            <td>
+                            <td style="border: 0">
                             </td>
-                            <td rowspan="5">
+                            <td rowspan="5" style="border: 0">
                                 <select id="RightList" multiple="multiple" asp-for="PlayersInGame" asp-items="@(new SelectList(Model.PlayersInGame, "PlayerId", "Name"))" size="8" class="col-md-10">
                                 </select>
                                 <br />
@@ -71,33 +78,28 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input id="ShiftRight" type="button" value=" >> " /></td>
+                            <td style="border: 0"><input id="ShiftRight" type="button" value=" >> " /></td>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
 
-                            <td><input id="ShiftLeft" type="button" value=" << " /></td>
+                            <td style="border: 0"><input id="ShiftLeft" type="button" value=" << " /></td>
                         </tr>
                         <tr>
                         </tr>
                     </tbody>
                 </table>
-                <div class="form-group">
-                    <label asp-for="Game.Location" class="control-label"></label>
-                    <input asp-for="Game.Location" class="form-control" />
-                    <span asp-validation-for="Game.Location" class="text-danger"></span>
-                </div>
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="Index">
+                    <input type="button" value="Back To Games" class="btn btn-secondary" />
+                </a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

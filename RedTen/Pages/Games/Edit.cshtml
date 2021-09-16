@@ -29,27 +29,30 @@
             $(".btn-primary").click(function () {
                 $("#RightList").find("option").each(function () {
                     $(this).prop("selected", true);
-                })
+                });
+                $("#LeftList").find("option").each(function () {
+                    $(this).prop("selected", true);
+                });
             });
         });
 </script>
-<h1>Edit</h1>
+<h1>Edit Game Results</h1>
 
-<h4>Game</h4>
+<p></p>
 <hr />
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Game.GameId" />
             <div class="col-md-4">
                 <div class="form-group">
-                    <label asp-for="Game.Session_Time" class="control-label"></label>
+                    <b><label asp-for="Game.Session_Time" class="control-label"></label></b>
                     <input asp-for="Game.Session_Time" class="form-control" />
                     <span asp-validation-for="Game.Session_Time" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Game.Location" class="control-label"></label>
+                    <b><label asp-for="Game.Location" class="control-label"></label></b>
                     <input id="ChangeLocation" asp-for="Game.Location" class="form-control" />
                     <span asp-validation-for="Game.Location" class="text-danger"></span>
                 </div>
@@ -106,14 +109,15 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="Index">
+                    <input type="button" asp-page="Index" value="Back To Games" class="btn btn-secondary" />
+                </a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

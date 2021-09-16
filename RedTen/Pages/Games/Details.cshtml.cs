@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using RedTen.Models;
 
 namespace RedTen.Pages.Games
 {
+    [AllowAnonymous]
     public class DetailsModel : PageModel
     {
         private readonly RedTen.Data.ApplicationDbContext _context;

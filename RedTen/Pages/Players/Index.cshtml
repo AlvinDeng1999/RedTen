@@ -5,10 +5,10 @@
     ViewData["Title"] = "Players";
 }
 
-<h1>Players</h1>
+<h1>Players <a id="addPlayerId" asp-page="Create"><input type="button" value="New Player" class="btn btn-success" /></a></h1>
 
 <p>
-    <a id="addPlayerId" asp-page="Create">Add Player</a>
+    
 </p>
 <table class="table">
     <thead>
@@ -25,16 +25,22 @@
     <tbody>
 @foreach (var item in Model.Player) {
         <tr>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td style="text-align:right">
-                <a asp-page="./Edit" asp-route-id="@item.PlayerId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.PlayerId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.PlayerId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.PlayerId">
+                    <input type="button" value="Edit" class="btn btn-primary btn-sm" />
+                </a> 
+                <a asp-page="./Details" asp-route-id="@item.PlayerId">
+                    <input type="button" value="Details" class="btn btn-secondary btn-sm" />
+                </a> 
+                <a asp-page="./Delete" asp-route-id="@item.PlayerId">
+                    <input type="button" value="Delete" class="btn btn-danger btn-sm" />
+                </a>
             </td>
         </tr>
 }

@@ -5,9 +5,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Player</h1>
 
-<h4>Player</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,25 +15,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Player.PlayerId" />
             <div class="form-group">
-                <label asp-for="Player.Name" class="control-label"></label>
-                <input asp-for="Player.Name" class="form-control" />
+                <b>
+                    <label asp-for="Player.Name" class="control-label"></label>
+                </b>                <input asp-for="Player.Name" class="form-control" />
                 <span asp-validation-for="Player.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Player.Email" class="control-label"></label>
-                <input asp-for="Player.Email" class="form-control" />
+                <b>
+                    <label asp-for="Player.Email" class="control-label"></label>
+                </b>                <input asp-for="Player.Email" class="form-control" />
                 <span asp-validation-for="Player.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" /> 
+                <a asp-page="./Index">
+                    <input type="button" value="Back To Players" class="btn btn-secondary" />
+                </a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
